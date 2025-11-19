@@ -64,6 +64,29 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- SLF4J核心门面（若使用Logback，此依赖可省略，因为logback-classic已包含slf4j-api） -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version> <!-- 推荐使用最新稳定版 -->
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Logback核心实现（包含SLF4J绑定，无需额外桥接包） -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.13</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Logback的核心模块（logback-classic依赖此包，可省略，Maven会自动传递） -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.5.19</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
