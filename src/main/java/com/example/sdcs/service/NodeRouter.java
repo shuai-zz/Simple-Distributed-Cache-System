@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class NodeRouter {
     }
 
     private String getNodeBaseUrl(int nodeIndex) {
-        var result="http://" + nodeConfig.getNodes().get(nodeIndex);
+        var result = "http://" + nodeConfig.getNodes().get(nodeIndex);
         log.info("nodeBaseUrl:{}", result);
         return result;
     }
@@ -51,13 +52,16 @@ public class NodeRouter {
         if (isLocal(nodeIndex)) {
             return cacheService.get(key);
         } else {
-            var result= client.get()
-                    .uri(getNodeBaseUrl(nodeIndex) + "/" + key)
-                    .retrieve()
-                    .bodyToMono(Map.class)
-                    .block();
-            if(result!=null) return result.get(key);
-            return null;
+            try {
+                var result = client.get()
+                        .uri(getNodeBaseUrl(nodeIndex) + "/" + key)
+                        .retrieve()
+                        .bodyToMono(Map.class)
+                        .block();
+                return result != null ? result.get(key) : null;
+            } catch (WebClientResponseException.NotFound e) {
+                return null;
+            }
         }
     }
 
