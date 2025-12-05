@@ -90,11 +90,11 @@
 1. 克隆代码并进入项目目录
     ``` bash
     git clone https://github.com/shuai-zz/Simple-Distributed-Cache-System.git 
-    cd simple_distributed_cache_system
+    cd Simple_Distributed_Cache_System
     ```
 2. maven构建项目
     ```bash
-    mvn clean package
+    mvn clean package -DskipTests
     ```
    - 构建成功后在target/目录下生成sdcs-0.0.1-SNAPSHOT.jar文件
 3. 构建并运行docker容器
