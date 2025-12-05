@@ -81,7 +81,7 @@
 │   │   │               │   ├── CacheService.java                         // 缓存服务实现  
 │   │   │               │   └── NodeRouter.java                          // 节点路由服务，根据key确定数据应存储在哪个节点  
 │   │   │               └── util  
-│   │   │                   └── HashUtil.java                             // 工具类，提供哈希计算功能用于节点选择
+│   │   │                   └── HashUtil.java                             // 工具类，提供哈希计算功能用于节点选择  
 │   └── test  
 │  │       └── test.sh                                                      // 测试脚本
 
